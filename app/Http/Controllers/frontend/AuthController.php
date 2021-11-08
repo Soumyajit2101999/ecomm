@@ -74,20 +74,12 @@ else{
                 $request->session()->put('name',$userInfo->name);
                 $request->session()->put('email',$userInfo->email);
                 $request->session()->put('address',$userInfo->address);
-                $request->session()->put('u',$userInfo->pin);
+                //$request->session()->put('u',$userInfo->pin);
                 $request->session()->put('phone',$userInfo->phone);
                 $request->session()->put('gender',$userInfo->gender);
                 $non_pin_pro = array();
                 if(isset($_SESSION['cart'])){
                     foreach($_SESSION['cart'] as $key=>$value){
-                        $product = DB::table('product')->where('pro_id',$key)->get()->first();
-                        $product_pin = $product->pin;
-
-                        $pin_explode = explode(",",$product_pin);
-                        
-                        foreach($pin_explode as $px)
-                            {
-                                 if($px == $request->session()->get('u')){
                                          $user_id = $request->session()->get('user_id');
                                          $Query = DB::table('cart')->where('user_id',$user_id)->where('pro_id',$key)->count();
                                          if($Query == 0){
@@ -96,12 +88,7 @@ else{
                                             $data['pro_id'] = $key;
                                             $data['pro_quan'] = $value['quan'];
                                             $query = DB::table('cart')->insert($data);
-                                        }
-                                       
-                                    }
-                                   
-                            }    
-                                    
+                                        }        
                     }
                     unset($_SESSION['cart']);
                 }

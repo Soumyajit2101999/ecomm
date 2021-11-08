@@ -65,12 +65,6 @@
 	                  <input type="text" name = "order_city" class="form-control" placeholder="">
 	                </div>
 		            </div>
-		            <div class="col-md-6">
-		            	<div class="form-group">
-		            		<label for="postcodezip" >Postcode / ZIP *</label>
-	                  <input type="text" name= "order_zip" class="form-control" placeholder="">
-	                </div>
-		            </div>
 		            <div class="w-100"></div>
 		            <div class="col-md-6">
 	                <div class="form-group">
@@ -110,6 +104,7 @@
 						Grand Total<span class="inner-left-md">
 						<?php 
                 	$Total = 5000.00;
+					$_SESSION['total'] = $Total;
                   echo ("Rs.". $Total);
                    ?>		</span>
 					</div>
