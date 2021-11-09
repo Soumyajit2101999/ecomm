@@ -1,4 +1,4 @@
-<?php session_start(); ?>
+
 <div class="hero-wrap hero-bread" style="background-image: url('images/bg_1.jpg');">
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
@@ -70,6 +70,14 @@
 	                <div class="form-group">
 	                	<label for="phone" >Phone</label>
 	                  <input type="text" name = "order_phone" class="form-control" placeholder="">
+	                </div>
+	              </div>
+
+				  <div class="w-100"></div>
+		            <div class="col-md-6">
+	                <div class="form-group">
+	                	<label for="phone" >ZIP</label>
+	                  <input type="text" name = "order_zip" class="form-control" placeholder="">
 	                </div>
 	              </div>
 	              
@@ -146,7 +154,7 @@
 									<div class="form-group">
 										<div class="col-md-12">
 											<div class="radio">
-											   <label><input type="radio" name="optradio" class="mr-2" value= "paypal" required> Paypal</label>
+											   <label><input type="radio" name="optradio" class="mr-2" value= "online" required> Paypal</label>
 											</div>
 										</div>
 									</div>

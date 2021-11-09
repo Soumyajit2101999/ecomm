@@ -7,6 +7,7 @@ use App\Http\Controllers\frontend\HomeController;
 use App\Http\Controllers\frontend\ProductController;
 use App\Http\Controllers\frontend\CartController;
 use App\Http\Controllers\frontend\CheckoutController;
+use App\Http\Controllers\frontend\MyOrderController;
 use App\Http\Controllers\frontend\AuthController;
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,8 @@ Route::post('frontend/update_cart',[CartController::class,'update'])->name('fron
 Route::group(['middleware'=>['AuthCheck']],function(){
     Route::get('frontend/checkout',[CheckoutController::class,'view'])->name('frontend.checkout');
     Route::post('frontend/order_process',[CheckoutController::class,'process'])->name('frontend.order_process');
+    Route::get('frontend/my_order',[MyOrderController::class,'myorder_view'])->name('frontend.my_order');
+    Route::get('frontend/bill/{id}',[MyOrderController::class,'bill_view'])->name('frontend.bill');
 });
 });
 Route::get('/cat',[HomeController::class,'category_func'])->name('cat');
