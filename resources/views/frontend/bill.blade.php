@@ -43,22 +43,22 @@
                 <div class="col-sm-7">
                     <div class="row">
                         <div class="col-sm-4"> <strong>Address:</strong>
-                            <p>{{substr($details[0]->address)}}</p> </div>
+                            <p>{{$details[0]->address}}</p> </div>
                         </div>
-                        <div class="col-sm-4"> <strong>Number of Days:</strong>
-                            <p>5 Days</p>
+                        <div class="col-sm-4"> <strong>Delivery Date:</strong>
+                            <p>{{$details[0]->delivery_date}}</p> </div>
                         </div>
-                        <div class="col-sm-4"> <strong>Number Of Children:</strong>
-                            <p>5</p>
+                        <div class="col-sm-4"> <strong>Payment Status:</strong>
+                            <p>{{$details[0]->payment_status}}</p>
                         </div>
 						<div class="col-sm-4"> <strong>Number Of Adult Members:</strong>
                             <p>12</p>
                         </div>
-                        <div class="col-sm-4"> <strong>Booking ID:</strong>
-                            <p>Order ID</p>
+                        <div class="col-sm-4"> <strong>Order ID:</strong>
+                            <p>{{$details[0]->order_id}}</p>
                         </div>
                         <div class="col-sm-4"> <strong>Payment Mode:</strong>
-                            <p>Online Mode</p>
+                            <p>{{$details[0]->payment_method}}</p>
                         </div>
                     </div>
                 </div>
@@ -70,39 +70,38 @@
                         <table class="table mb-0">
                             <thead class="card-header">
                                 <tr>
-                                    <td class="col-6"><strong>Description</strong></td>
-                                    <td class="col-4 "><strong>Rate</strong></td>
+                                    <td class="col-6"><strong>Products</strong></td>
+                                    <td class="col-4 "><strong>Quantity</strong></td>
                                     <td class="col-2 "><strong>Amount</strong></td>
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php $subtotal = 0; ?>
+                                @foreach($product as $pro)
                                 <tr>
-                                    <td class="col-6">Adult Charges</td>
-                                    <td class="col-4">&#8377; Rs.123</td>
-                                    <td class="col-2">&#8377; Rs. 123456</td>
-                                </tr>
-                                <tr>
-                                    <td>Children Charges</td>
-                                    <td class="col-2">&#8377; Rs.9087</td>
-                                    <td>&#8377; Rs. 34546</td>
+                                    <td class="col-6">{{$pro['pro_name']}}</td>
+                                    <td class="col-4">{{$pro['pro_quan']}}</td>
+                                    <td class="col-2">&#8377; {{$pro['pro_price'] * $pro['pro_quan']}}</td>
+                                    <?php $subtotal += $pro['pro_price'] * $pro['pro_quan'];?>
                                 </tr>
                                
+                               @endforeach
                                
                             </tbody>
                             <tfoot class="card-footer">
                             <tr>
                                     <td colspan="2"><strong>Sub Total:</strong></td>
-                                    <td>&#8377; Rs. 098</td>
+                                    <td>&#8377; {{$subtotal}}</td>
                                 </tr>
                             <tr>
                                     <td>Coupon Code</td>
                                     <td> Soumya123 </td>
-                                    <td>-&#8377; Rs. 9876</td>
+                                    <td>-&#8377; </td>
                                 </tr>
                                
                                 <tr>
                                     <td colspan="2" class="border-bottom-0"><strong>Total:</strong></td>
-                                    <td class="border-bottom-0">&#8377; Rs. 1234</td>
+                                    <td class="border-bottom-0">&#8377; {{$details[0]->total_price}}</td>
                                 </tr>
                             </tfoot>
                         </table>

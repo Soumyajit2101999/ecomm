@@ -19,7 +19,11 @@ class MyOrderController extends Controller
         foreach($Query as $query){
             $product = $query->product_id;
             $product_query = DB::table('product')->where('pro_id',$product)->get()->first();
-            $pro[] = $product_query;
+            $pro[] = array(
+                "pro_name"=>$product_query->pro_name,
+                "pro_quan"=>$query->product_quan,
+                "pro_price"=>$product_query->pro_price
+                                            );
         }
         return view('frontend.bill',['details'=>$Query,'product'=>$pro]);
     }
