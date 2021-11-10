@@ -73,6 +73,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
 
     Route::get('/backend/sub_cat/{id}',[App\Http\Controllers\backend\SubCategoryController::class,'sub_category'])->name('backend.sub_cat');
 
+    Route::post('backend/sub_category_post',[App\Http\Controllers\backend\SubCategoryController::class,'add_sub_category'])->name('backend.sub_category_post');
+
 
     //Contact
     Route::get('/backend/contact',[App\Http\Controllers\backend\ContactController::class,'contact'])->name('backend.contact');

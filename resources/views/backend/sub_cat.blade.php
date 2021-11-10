@@ -121,19 +121,19 @@
                 <div class="col-lg-5">
                 
 
-        <form action="{{route('backend.category_post')}}" method="POST"  enctype="multipart/form-data">
+        <form action="{{route('backend.sub_category_post')}}" method="POST"  enctype="multipart/form-data">
         @csrf
         <div class="form-row">
           <div class="form-group ">
             <label for="inputEmail4">Sub Category Name </label>
             <input type="text" name="sub_cat_name" class="form-control" id="inputEmail4">
-            <span class="text-danger">@error('achieve_name'){{$message}}@enderror</span>
+            <span class="text-danger">@error('sub_cat_name'){{$message}}@enderror</span>
           </div>
           </div>
-          <input name = "parent_id" type = "hidden" value = 0>
+          <input name = "parent_id" type = "hidden" value = {{$id}}>
           <input name = "is_active" type = "hidden" value = 1>
         
-        <button type="submit" class="btn btn-primary">Add Category</button>
+        <button type="submit" class="btn btn-primary">Add Sub Category</button>
       </form>
 
 
@@ -165,7 +165,7 @@
                   <th>Sl No</th>
                   <th>Category Name</th>
                   
-                  <th>Add Sub Category</th>
+                  <th>Add Sub-Sub Category</th>
                   <th>Delete</th>
                 </tr>
               </thead>

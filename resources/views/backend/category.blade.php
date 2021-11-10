@@ -127,7 +127,7 @@
           <div class="form-group ">
             <label for="inputEmail4">Category Name </label>
             <input type="text" name="cat_name" class="form-control" id="inputEmail4">
-            <span class="text-danger">@error('achieve_name'){{$message}}@enderror</span>
+            <span class="text-danger">@error('cat_name'){{$message}}@enderror</span>
           </div>
           </div>
           <input name = "parent_id" type = "hidden" value = 0>
