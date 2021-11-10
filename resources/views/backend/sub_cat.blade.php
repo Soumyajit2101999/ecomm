@@ -125,8 +125,8 @@
         @csrf
         <div class="form-row">
           <div class="form-group ">
-            <label for="inputEmail4">Category Name </label>
-            <input type="text" name="cat_name" class="form-control" id="inputEmail4">
+            <label for="inputEmail4">Sub Category Name </label>
+            <input type="text" name="sub_cat_name" class="form-control" id="inputEmail4">
             <span class="text-danger">@error('achieve_name'){{$message}}@enderror</span>
           </div>
           </div>
@@ -171,7 +171,7 @@
               </thead>
               <tbody>
                     <?php $count = 0; ?>
-                    @foreach(session()->get('category') as $key=>$cat)
+                    @foreach($sub_cat as $key=>$cat)
                     <tr>
                          
                        <!--  <th scope="row">1</th> -->
@@ -179,7 +179,7 @@
                        <td>{{++$count}}</td>
                         <td>{{$cat->category_name}}</td>
                         
-                        <td><a class="btn btn-info"  href="{{route('backend.sub_cat',$cat->id)}}">Add</a></td>
+                        <td><a class="btn btn-info"  href="">Add</a></td>
                         <td><a class="btn btn-danger"  href="{{route('backend.category_delete',$cat->id)}}">Delete</a></td>
                     </tr>
                    @endforeach

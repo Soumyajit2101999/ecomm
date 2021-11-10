@@ -8,7 +8,7 @@
         <li class="breadcrumb-item">
           <a href="#">Dashboard</a>
         </li>
-        <li class="breadcrumb-item active">Category Table</li>
+        <li class="breadcrumb-item active">Contact Table</li>
       </ol>
       <!-- Icon Cards-->
       
@@ -116,86 +116,57 @@
         </div>
       </div>
       <!-- Example DataTables Card-->
-        <div class="container"> 
-            <div class="row">
-                <div class="col-lg-5">
-                
-
-        <form action="{{route('backend.category_post')}}" method="POST"  enctype="multipart/form-data">
-        @csrf
-        <div class="form-row">
-          <div class="form-group ">
-            <label for="inputEmail4">Category Name </label>
-            <input type="text" name="cat_name" class="form-control" id="inputEmail4">
-            <span class="text-danger">@error('achieve_name'){{$message}}@enderror</span>
-          </div>
-          </div>
-          <input name = "parent_id" type = "hidden" value = 0>
-          <input name = "is_active" type = "hidden" value = 1>
-        
-        <button type="submit" class="btn btn-primary">Add Category</button>
-      </form>
-
-
-
-
-
-
-                </div>
-                <div class="col-lg-7">
-                <div class="card mb-3 overflow">
+      <div class="card mb-3 overflow">
         <div class="card-header">
-        @if(session()->has('success'))
-                <div class = "alert alert-success">
-                {{session()->get('success')}}
-                </div>
-                @endif
-
-                @if(session()->has('fail'))
-                <div class = "alert alert-danger">
-                {{session()->get('fail')}}
-                </div>
-                @endif
           <i class="fa fa-table"></i> Data Table Example</div>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
               <thead class = "bg-success">
                 <tr>
-                  <th>Sl No</th>
-                  <th>Category Name</th>
-                  
-                  <th>Add Sub Category</th>
-                  <th>Delete</th>
+                    <th>S No.</th>
+                    <th>Order Unique ID</th>
+                    <th>Order By</th>
+                    <th>Total Price</th>
+                    <th>Discount</th>
+                    <th>Tax</th>
+                    <th>Delivery Charge</th>
+                    <th>Payment Method</th>
+                    <th>Payment Status</th>
+                    <th>Order Date</th>
+                    <th>Delivery Status</th>
+                    <th>Delivery Date</th>
+                    <th>View</th> 
                 </tr>
               </thead>
               <tbody>
-                    <?php $count = 0; ?>
-                    @foreach(session()->get('category') as $key=>$cat)
-                    <tr>
-                         
-                       <!--  <th scope="row">1</th> -->
+<?php $i = 1; ?>
 
-                       <td>{{++$count}}</td>
-                        <td>{{$cat->category_name}}</td>
-                        
-                        <td><a class="btn btn-info"  href="{{route('backend.sub_cat',$cat->id)}}">Add</a></td>
-                        <td><a class="btn btn-danger"  href="{{route('backend.category_delete',$cat->id)}}">Delete</a></td>
-                    </tr>
-                   @endforeach
-                    
-                </tbody>
+@foreach($details as $detail)
+               <tr>
+                   <td>{{$i++}}</td>
+                   <td>{{$detail->order_unique_id}}</td>
+                   <td>{{$detail->name}}</td>
+                   <td>{{$detail->total_price}}</td>
+                   <td>{{$detail->discount}}</td>
+                   <td>{{$detail->tax}}</td>
+                   <td>{{$detail->delivery_charge}}</td>
+                   <td>{{$detail->payment_method}}</td>
+                   <td>{{$detail->payment_status}}</td>
+                   <td>{{$detail->order_date}}</td>
+                   <td>{{$detail->delivery_status}}</td>
+                   <td>{{$detail->delivery_date}}</td>
+                   <td><a href='{{route('backend.bill',$detail->order_id)}}'>View</a></td>
+               </tr> 
+
+@endforeach
+              </tbody>
             </table>
           </div>
         </div>
         <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
       </div>
-                </div>
-            </div>
-        </div>
-
-      
     </div>
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
-   @endsection
+    @endsection

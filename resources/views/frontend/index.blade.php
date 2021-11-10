@@ -3146,6 +3146,7 @@
 <!-- For demo purposes – can be removed on production : End --> 
 
 <!-- JavaScripts placed at the end of the document so the pages load faster --> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
 <script src="{{asset('frontend/js/jquery-1.11.1.min.js')}}"></script> 
 <script src="{{asset('frontend/js/bootstrap.min.js')}}"></script> 
@@ -3174,8 +3175,30 @@ foreach($_SESSION['featured_id'] as $fea)
                type: 'post',
                data: jQuery('#{{"$fea"}}').serialize(),
                success:function(result){
-                jQuery('#thank_you_msg').html(result);
+                //jQuery('#thank_you_msg').html(result);
+                if(result == "Product Added to your cart"){
+                swal("Success",result,"success",{
+                  button:"OK"
+                });
+                }
+                else if(result == "This Product is already in your cart"){
+                  swal("",result,"info",{
+                  button:"OK"
+                });
+                }
+                else if(result == "This product is not available in your area"){
+                  swal("Sorry",result,"error",{
+                  button:"OK"
+                });
+                }
+                else{
+                  swal("Sorry",result,"error",{
+                  button:"OK"
+                });
+                }
                    jQuery('#{{"$fea"}}') ['0'].reset();
+                   
+
                    
 
                }

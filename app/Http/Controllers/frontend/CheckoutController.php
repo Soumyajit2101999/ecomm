@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
 use Session;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\testmail;
 class CheckoutController extends Controller
 {
     function view(){
@@ -118,6 +120,13 @@ class CheckoutController extends Controller
                 $users = Session::get('user_id');
                 $delete = DB::table('cart')->where('user_id',$users)->delete();
             }
+            $mail = [
+                'title' => 'Ecommerce',
+                'body' => 'Thanks for placing Order.',
+   
+            ];
+            
+             Mail::to(Session::get('email'))->send(new testmail($mail));
             unset($_SESSION['subtotal']);
             unset($_SESSION['total']);
 

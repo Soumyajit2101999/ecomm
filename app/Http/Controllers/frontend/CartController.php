@@ -44,9 +44,29 @@ class CartController extends Controller
                 }
                 }
                 else{
+                    $count = 0;
+                    if(isset($_SESSION['cart'])){
+                        foreach($_SESSION['cart'] as $key => $value){
+                            if($key == $request->id){
+                                $count++;
+                            }
+                            
+                        }
+                        if($count == 0){
+                            $_SESSION['cart'][$request->id]=array('quan'=>$request->quan);
+                            $text = "Product Added to your cart";
+                            break;
+                        }
+                        else{
+                            $text = "This Product is already in your cart";
+                            break;
+                        }
+                    }
+                    else{
                 $_SESSION['cart'][$request->id]=array('quan'=>$request->quan);
                 $text = "Product Added to your cart";
                 break;
+                    }
                 }
             }
             else{

@@ -9,6 +9,7 @@ use App\Http\Controllers\frontend\CartController;
 use App\Http\Controllers\frontend\CheckoutController;
 use App\Http\Controllers\frontend\MyOrderController;
 use App\Http\Controllers\frontend\AuthController;
+use App\Http\Controllers\frontend\ContactController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,6 +32,8 @@ Route::get('/frontend/login',[AuthController::class,'login'])->name('frontend.lo
 Route::post('/frontend/save',[AuthController::class,'save'])->name('frontend.save');
 Route::post('/frontend/check',[AuthController::class,'check'])->name('frontend.check');
 Route::get('/frontend/logout',[AuthController::class,'logout'])->name('frontend.logout');
+Route::get('/frontend/contact',[ContactController::class,'contact_view'])->name('frontend.contact');
+Route::post('/frontend/contact_post',[ContactController::class,'contact_post'])->name('frontend.contact_post');
 Route::get('/',[HomeController::class,'home_view'])->name('frontend.index');
 Route::get('frontend/product_detail/{id}',[ProductController::class,'product_detail'])->name('frontend.product_detail');
 Route::post('frontend/add_pin',[ProductController::class,'add_pin_checker'])->name('frontend.add_pin');
@@ -63,6 +66,23 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('/master',[App\Http\Controllers\backend\MasterController::class,'master'])->name('backend.master');
 
     Route::get('/backend/category',[App\Http\Controllers\backend\CategoryController::class,'category'])->name('backend.category');
+
+    Route::post('backend/category_post',[App\Http\Controllers\backend\CategoryController::class,'add_category'])->name('backend.category_post');
+
+    Route::get('/backend/category_delete/{id}',[App\Http\Controllers\backend\CategoryController::class,'cat_delete'])->name('backend.category_delete');
+
+    Route::get('/backend/sub_cat/{id}',[App\Http\Controllers\backend\SubCategoryController::class,'sub_category'])->name('backend.sub_cat');
+
+
+    //Contact
+    Route::get('/backend/contact',[App\Http\Controllers\backend\ContactController::class,'contact'])->name('backend.contact');
+    Route::get('/backend/contact_delete/{id}',[App\Http\Controllers\backend\ContactController::class,'contact_delete'])->name('backend.contact_delete');
+
+//Order
+    Route::get('/backend/orders',[App\Http\Controllers\backend\OrderController::class,'order_view'])->name('backend.orders');
+//Bill
+Route::get('backend/bill/{id}',[App\Http\Controllers\backend\OrderController::class,'bill_view'])->name('backend.bill');
+
 
     });
     Route::get('/backend/login',function(){
