@@ -29,4 +29,9 @@ class SubCategoryController extends Controller
 		else
 		   return redirect()->back()->with('fail','Something Went Wrong');
    }
+   function sub_sub_category($id){
+	$sub_sub_category = DB::table('categories')->where('parent_id',$id)->get();
+   
+	return view('backend.sub_sub',['sub_cat'=>$sub_sub_category,'id'=>$id]);
+}
 }

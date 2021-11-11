@@ -75,6 +75,15 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
 
     Route::post('backend/sub_category_post',[App\Http\Controllers\backend\SubCategoryController::class,'add_sub_category'])->name('backend.sub_category_post');
 
+    Route::get('/backend/sub_sub/{id}',[App\Http\Controllers\backend\SubCategoryController::class,'sub_sub_category'])->name('backend.sub_sub');
+
+    Route::get('/backend/product/{id}',[App\Http\Controllers\backend\ProductController::class,'product_view'])->name('backend.product');
+
+    Route::get('/backend/add_product/{id}',[App\Http\Controllers\backend\ProductController::class,'add_product_view'])->name('backend.add_product');
+
+    Route::post('/backend/add_product_post',[App\Http\Controllers\backend\ProductController::class,'add_product_post'])->name('backend.add_product_post');
+
+
 
     //Contact
     Route::get('/backend/contact',[App\Http\Controllers\backend\ContactController::class,'contact'])->name('backend.contact');

@@ -125,7 +125,7 @@
         @csrf
         <div class="form-row">
           <div class="form-group ">
-            <label for="inputEmail4">Sub Category Name </label>
+            <label for="inputEmail4">Sub Sub Category Name </label>
             <input type="text" name="sub_cat_name" class="form-control" id="inputEmail4">
             <span class="text-danger">@error('sub_cat_name'){{$message}}@enderror</span>
           </div>
@@ -133,7 +133,7 @@
           <input name = "parent_id" type = "hidden" value = {{$id}}>
           <input name = "is_active" type = "hidden" value = 1>
         
-        <button type="submit" class="btn btn-primary">Add Sub Category</button>
+        <button type="submit" class="btn btn-primary">Add Sub Sub Category</button>
       </form>
 
 
@@ -165,7 +165,7 @@
                   <th>Sl No</th>
                   <th>Category Name</th>
                   
-                  <th>Add Sub-Sub Category</th>
+                  <th>Add Products</th>
                   <th>Delete</th>
                 </tr>
               </thead>
@@ -179,7 +179,7 @@
                        <td>{{++$count}}</td>
                         <td>{{$cat->category_name}}</td>
                         
-                        <td><a class="btn btn-info"  href="{{route('backend.sub_sub',$cat->id)}}">Add</a></td>
+                        <td><a class="btn btn-info"  href="{{route('backend.product',$cat->id)}}">Add</a></td>
                         <td><a class="btn btn-danger"  href="{{route('backend.category_delete',$cat->id)}}">Delete</a></td>
                     </tr>
                    @endforeach

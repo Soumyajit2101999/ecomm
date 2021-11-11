@@ -6,9 +6,9 @@
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="#">Dashboard</a>
+          <a href="">Product</a>
         </li>
-        <li class="breadcrumb-item active">Category Table</li>
+        <li class="breadcrumb-item active">Product Form</li>
       </ol>
       <!-- Icon Cards-->
       
@@ -116,36 +116,7 @@
         </div>
       </div>
       <!-- Example DataTables Card-->
-        <div class="container"> 
-            <div class="row">
-                <div class="col-lg-5">
-                
-
-        <form action="{{route('backend.sub_category_post')}}" method="POST"  enctype="multipart/form-data">
-        @csrf
-        <div class="form-row">
-          <div class="form-group ">
-            <label for="inputEmail4">Sub Category Name </label>
-            <input type="text" name="sub_cat_name" class="form-control" id="inputEmail4">
-            <span class="text-danger">@error('sub_cat_name'){{$message}}@enderror</span>
-          </div>
-          </div>
-          <input name = "parent_id" type = "hidden" value = {{$id}}>
-          <input name = "is_active" type = "hidden" value = 1>
-        
-        <button type="submit" class="btn btn-primary">Add Sub Category</button>
-      </form>
-
-
-
-
-
-
-                </div>
-                <div class="col-lg-7">
-                <div class="card mb-3 overflow">
-        <div class="card-header">
-        @if(session()->has('success'))
+                @if(session()->has('success'))
                 <div class = "alert alert-success">
                 {{session()->get('success')}}
                 </div>
@@ -156,46 +127,89 @@
                 {{session()->get('fail')}}
                 </div>
                 @endif
-          <i class="fa fa-table"></i> Data Table Example</div>
-        <div class="card-body">
-          <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-              <thead class = "bg-success">
-                <tr>
-                  <th>Sl No</th>
-                  <th>Category Name</th>
-                  
-                  <th>Add Sub-Sub Category</th>
-                  <th>Delete</th>
-                </tr>
-              </thead>
-              <tbody>
-                    <?php $count = 0; ?>
-                    @foreach($sub_cat as $key=>$cat)
-                    <tr>
-                         
-                       <!--  <th scope="row">1</th> -->
-
-                       <td>{{++$count}}</td>
-                        <td>{{$cat->category_name}}</td>
-                        
-                        <td><a class="btn btn-info"  href="{{route('backend.sub_sub',$cat->id)}}">Add</a></td>
-                        <td><a class="btn btn-danger"  href="{{route('backend.category_delete',$cat->id)}}">Delete</a></td>
-                    </tr>
-                   @endforeach
-                    
-                </tbody>
-            </table>
+      <form action="{{route('backend.add_product_post')}}" method="POST"  enctype="multipart/form-data">
+        @csrf
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputEmail4">Product Name</label>
+            <input type="text" name="name" class="form-control" id="inputEmail4">
+            <span class="text-danger">@error('name'){{$message}}@enderror</span>
           </div>
         </div>
-        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-      </div>
-                </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputEmail4">Product Price</label>
+            <input type="text" name="price" class="form-control" id="inputEmail4">
+            <span class="text-danger">@error('price'){{$message}}@enderror</span>
+          </div>
+         
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputEmail4">Product Discount</label>
+            <input type="text" name="discount" class="form-control" id="inputEmail4">
+            <span class="text-danger">@error('discount'){{$message}}@enderror</span>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputEmail4">Product Available</label>
+              <input type="text" name="available" class="form-control" id="inputEmail4">
+              <span class="text-danger">@error('available'){{$message}}@enderror</span>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputEmail4">Product Pin</label>
+              <input type="text" name="pin" class="form-control" id="inputEmail4">
+              <span class="text-danger">@error('pin'){{$message}}@enderror</span>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-10">
+            <label for="exampleFormControlTextarea2">Product Description</label>
+            <textarea class="form-control" name = "description" id="content" rows="3"></textarea>
+            <span class="text-danger">@error('description'){{$message}}@enderror</span>
+            </div>
+          </div>
+         
+        <div class="form-row">
+            <div class="form-group col-md-4 pt-4 mt-2">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="inputGroupFileAddon01">Upload Product Image</span>
+                    </div>
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" name="pro_image" id="inputGroupFile01"
+                        aria-describedby="inputGroupFileAddon01">
+                      <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                      
+                    </div>
+                  </div>
             </div>
         </div>
 
-      
+        <div class="form-row">
+            <div class="form-group col-md-4 pt-4 mt-2">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="inputGroupFileAddon01">Upload Product multiple Images</span>
+                    </div>
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" name="pro_other_image[]" id="inputGroupFile01" multiple
+                        aria-describedby="inputGroupFileAddon01">
+                      <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                      
+                    </div>
+                  </div>
+            </div>
+        </div>
+        <input type = "hidden" name = "gid" value = "{{$id}}">
+        <button type="submit" class="btn btn-primary">Add Products</button>
+      </form>
     </div>
+    <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+<script>
+CKEDITOR.replace( 'content' );
+</script>
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
-   @endsection
+    @endsection

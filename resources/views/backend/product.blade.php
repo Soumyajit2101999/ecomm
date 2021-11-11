@@ -8,10 +8,12 @@
         <li class="breadcrumb-item">
           <a href="#">Dashboard</a>
         </li>
-        <li class="breadcrumb-item active">Category Table</li>
+        <li class="breadcrumb-item active">Contact Table</li>
       </ol>
       <!-- Icon Cards-->
-      
+      <div>
+        <a class="btn btn-success" href="{{route('backend.add_product',$id)}}">Add Products</a>
+      </div><br>
       <!-- Area Chart Example-->
       <div class="card mb-3 d-none">
         <div class="card-header">
@@ -116,46 +118,8 @@
         </div>
       </div>
       <!-- Example DataTables Card-->
-        <div class="container"> 
-            <div class="row">
-                <div class="col-lg-5">
-                
-
-        <form action="{{route('backend.sub_category_post')}}" method="POST"  enctype="multipart/form-data">
-        @csrf
-        <div class="form-row">
-          <div class="form-group ">
-            <label for="inputEmail4">Sub Category Name </label>
-            <input type="text" name="sub_cat_name" class="form-control" id="inputEmail4">
-            <span class="text-danger">@error('sub_cat_name'){{$message}}@enderror</span>
-          </div>
-          </div>
-          <input name = "parent_id" type = "hidden" value = {{$id}}>
-          <input name = "is_active" type = "hidden" value = 1>
-        
-        <button type="submit" class="btn btn-primary">Add Sub Category</button>
-      </form>
-
-
-
-
-
-
-                </div>
-                <div class="col-lg-7">
-                <div class="card mb-3 overflow">
+      <div class="card mb-3 overflow">
         <div class="card-header">
-        @if(session()->has('success'))
-                <div class = "alert alert-success">
-                {{session()->get('success')}}
-                </div>
-                @endif
-
-                @if(session()->has('fail'))
-                <div class = "alert alert-danger">
-                {{session()->get('fail')}}
-                </div>
-                @endif
           <i class="fa fa-table"></i> Data Table Example</div>
         <div class="card-body">
           <div class="table-responsive">
@@ -163,39 +127,39 @@
               <thead class = "bg-success">
                 <tr>
                   <th>Sl No</th>
-                  <th>Category Name</th>
-                  
-                  <th>Add Sub-Sub Category</th>
+                  <th>Name</th>
+                  <th>Image</th>
+                  <th>Price</th>
+                  <th>Discount</th>
+                  <th>Description</th>
+                  <th>Available</th>
+                  <th>Edit</th>
                   <th>Delete</th>
                 </tr>
               </thead>
               <tbody>
-                    <?php $count = 0; ?>
-                    @foreach($sub_cat as $key=>$cat)
-                    <tr>
-                         
-                       <!--  <th scope="row">1</th> -->
-
-                       <td>{{++$count}}</td>
-                        <td>{{$cat->category_name}}</td>
-                        
-                        <td><a class="btn btn-info"  href="{{route('backend.sub_sub',$cat->id)}}">Add</a></td>
-                        <td><a class="btn btn-danger"  href="{{route('backend.category_delete',$cat->id)}}">Delete</a></td>
-                    </tr>
-                   @endforeach
-                    
-                </tbody>
+                <?php $count = 0; ?>
+                @foreach($product as $product)
+                <tr>
+                  <td>{{++$count}}</td>
+                  <td>{{$product->pro_name}}</td>
+                  <td><img height = 100 width = 100 alt = 'Image not found' src = "{{asset('frontend/img/'.$product->pro_image)}}"></td>
+                  <td>{{$product->pro_price}}</td>
+                  <td>{{$product->pro_disc}}</td>
+                  <td>{!!$product->pro_description!!}</td>
+                  <td>{{$product->pro_available}}</td>
+                  <td><a class="btn btn-warning" href="">Edit</a></td>
+                  <td><a class="btn btn-danger" href="">Delete</a></td>
+                </tr>
+                @endforeach
+                
+              </tbody>
             </table>
           </div>
         </div>
         <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
       </div>
-                </div>
-            </div>
-        </div>
-
-      
     </div>
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
-   @endsection
+    @endsection
