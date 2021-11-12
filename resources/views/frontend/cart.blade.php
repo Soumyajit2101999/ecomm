@@ -26,7 +26,8 @@
                            </td>
                         </tr>
                      </tfoot>
-<?php $subtotal = 0; ?>
+<?php $subtotal = 0; 
+$grand_total = 0;?>
 @foreach($product as $pro)
 
 
@@ -67,8 +68,25 @@
                      </table>
 </form>
 
+<?php
+if (session()->has('coupon')) {
+   $grand_total = $subtotal-(session()->get('coupon_price'));
+   echo "Coupon Applied";
+}
+?>
+
+
+   <form action="{{route('frontend.coupon')}}" method = "POST">
+      @csrf
+      <input type="text" name = "coupon">
+      <input type="submit" value ="Get Quote">
+   </form>
+
                      <div class="cart-sub-total">
-                              Subtotal    <span class="inner-left-md"><?php echo (" $ ".$subtotal); $_SESSION['subtotal'] = $subtotal?></span>
+                              Subtotal    <span class="inner-left-md"><?php echo (" $ ".$subtotal); $_SESSION['subtotal'] = $subtotal; ?></span>
+                           </div>
+                           <div class="cart-sub-total">
+                              Grand Total    <span class="inner-left-md"><?php echo (" $ ".$grand_total); $_SESSION['grand_total'] = $grand_total; ?></span>
                            </div>
 
                            

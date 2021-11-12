@@ -111,7 +111,7 @@
 					<div class="cart-grand-total">
 						Grand Total<span class="inner-left-md">
 						<?php 
-                	$Total = 5000.00;
+                	$Total = $_SESSION['grand_total'];
 					$_SESSION['total'] = $Total;
                   echo ("Rs.". $Total);
                    ?>		</span>

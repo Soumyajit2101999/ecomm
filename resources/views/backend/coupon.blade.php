@@ -121,19 +121,24 @@
                 <div class="col-lg-5">
                 
 
-        <form action="{{route('backend.sub_category_post')}}" method="POST"  enctype="multipart/form-data">
+        <form action="{{route('backend.coupon_post')}}" method="POST"  enctype="multipart/form-data">
         @csrf
         <div class="form-row">
           <div class="form-group ">
-            <label for="inputEmail4">Sub Category Name </label>
-            <input type="text" name="sub_cat_name" class="form-control" id="inputEmail4">
-            <span class="text-danger">@error('sub_cat_name'){{$message}}@enderror</span>
+            <label for="inputEmail4">Coupon Name </label>
+            <input type="text" name="coupon_name" class="form-control" id="inputEmail4">
+            <span class="text-danger">@error('coupon_name'){{$message}}@enderror</span>
           </div>
           </div>
-          <input name = "parent_id" type = "hidden" value = {{$id}}>
-          <input name = "is_active" type = "hidden" value = 0>
+          <div class="form-row">
+            <div class="form-group ">
+              <label for="inputEmail4">Coupon Price </label>
+              <input type="text" name="coupon_price" class="form-control" id="inputEmail4">
+              <span class="text-danger">@error('coupon_price'){{$message}}@enderror</span>
+            </div>
+            </div>
         
-        <button type="submit" class="btn btn-primary">Add Sub Category</button>
+        <button type="submit" class="btn btn-primary">Add Coupon</button>
       </form>
 
 
@@ -163,24 +168,23 @@
               <thead class = "bg-success">
                 <tr>
                   <th>Sl No</th>
-                  <th>Category Name</th>
-                  
-                  <th>Add Sub-Sub Category</th>
+                  <th>Coupon Name</th>
+                  <th>Coupon Price</th>
                   <th>Delete</th>
                 </tr>
               </thead>
               <tbody>
                     <?php $count = 0; ?>
-                    @foreach($sub_cat as $key=>$cat)
+                    @foreach($coupon as $coupon)
                     <tr>
                          
                        <!--  <th scope="row">1</th> -->
 
                        <td>{{++$count}}</td>
-                        <td>{{$cat->category_name}}</td>
+                        <td>{{$coupon->coupon}}</td>
                         
-                        <td><a class="btn btn-info"  href="{{route('backend.sub_sub',$cat->id)}}">Add</a></td>
-                        <td><a class="btn btn-danger"  href="{{route('backend.category_delete',$cat->id)}}">Delete</a></td>
+                        <td>{{$coupon->coupon_price}}</td>
+                        <td><a class="btn btn-danger"  href="">Delete</a></td>
                     </tr>
                    @endforeach
                     

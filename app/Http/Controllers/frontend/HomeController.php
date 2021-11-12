@@ -112,6 +112,7 @@ $address = DB::table('address')->where('user_id',1)->get();
                 'parent_id' => $sql1->parent_id,
                 'category_name' => $sql1->category_name,
                 'subcategory' => $this->sub_categories($sql1->id),
+                'is_active' => $sql1->is_active,
             );
         }
         return $categories;
@@ -122,8 +123,12 @@ $address = DB::table('address')->where('user_id',1)->get();
         $html = '<ol class="link">';
         foreach($categories as $category){
     
-            $html .= '<li><b>'.$category['category_name'].'</b></li>';
-            
+            if($category['is_active'] == 1){
+            $html .= '<li><a href = "">'.$category['category_name'].'</a></li>';
+            }
+            else{
+                $html .= '<li ><b>'.$category['category_name'].'</b></li>';
+            }
             if( ! empty($category['subcategory'])){
                 $html .= $this->viewsubcat($category['subcategory']);
             }

@@ -10,6 +10,9 @@ use App\Http\Controllers\frontend\CheckoutController;
 use App\Http\Controllers\frontend\MyOrderController;
 use App\Http\Controllers\frontend\AuthController;
 use App\Http\Controllers\frontend\ContactController;
+use App\Http\Controllers\frontend\WishListController;
+use App\Http\Controllers\frontend\ReviewController;
+use App\Http\Controllers\frontend\CouponController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -42,11 +45,16 @@ Route::post('frontend/add_to_cart',[CartController::class,'add'])->name('fronten
 Route::get('frontend/cart',[CartController::class,'view'])->name('frontend.cart');
 Route::get('frontend/delete_item/{id}',[CartController::class,'delete'])->name('frontend.delete_item');
 Route::post('frontend/update_cart',[CartController::class,'update'])->name('frontend.update_cart');
+Route::post('frontend/add_to_wishlist',[WishListController::class,'add'])->name('frontend.add_to_wishlist');
+Route::post('frontend/coupon',[CouponController::class,'apply'])->name('frontend.coupon');
 Route::group(['middleware'=>['AuthCheck']],function(){
     Route::get('frontend/checkout',[CheckoutController::class,'view'])->name('frontend.checkout');
     Route::post('frontend/order_process',[CheckoutController::class,'process'])->name('frontend.order_process');
     Route::get('frontend/my_order',[MyOrderController::class,'myorder_view'])->name('frontend.my_order');
     Route::get('frontend/bill/{id}',[MyOrderController::class,'bill_view'])->name('frontend.bill');
+    Route::get('frontend/wishlist',[WishListController::class,'view_wishlist'])->name('frontend.wishlist');
+    Route::get('frontend/wishlist_delete/{id}',[WishListController::class,'delete'])->name('frontend.wishlist_delete');
+    Route::post('frontend/review_post',[ReviewController::class,'post'])->name('frontend.review_post');
 });
 });
 Route::get('/cat',[HomeController::class,'category_func'])->name('cat');
@@ -83,7 +91,15 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
 
     Route::post('/backend/add_product_post',[App\Http\Controllers\backend\ProductController::class,'add_product_post'])->name('backend.add_product_post');
 
+    Route::get('/backend/edit_product/{id}',[App\Http\Controllers\backend\ProductController::class,'edit_product_view'])->name('backend.edit_product');
 
+    Route::post('/backend/edit_product_post',[App\Http\Controllers\backend\ProductController::class,'edit_product_post'])->name('backend.edit_product_post');
+
+    Route::get('/backend/delete_product/{id}',[App\Http\Controllers\backend\ProductController::class,'delete_product'])->name('backend.delete_product');
+
+    Route::get('/backend/coupon',[App\Http\Controllers\backend\CouponController::class,'coupon_view'])->name('backend.coupon');
+
+    Route::post('/backend/coupon_post',[App\Http\Controllers\backend\CouponController::class,'post'])->name('backend.coupon_post');
 
     //Contact
     Route::get('/backend/contact',[App\Http\Controllers\backend\ContactController::class,'contact'])->name('backend.contact');

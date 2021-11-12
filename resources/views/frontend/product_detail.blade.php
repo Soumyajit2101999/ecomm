@@ -51,6 +51,71 @@
     </form>
     @endif
 
+    <div class="container py-5">
+      @if(session()->has('success'))
+     <div class = "alert alert-success">
+     {{session()->get('success')}}
+     </div>
+     @endif
+ 
+
+
+     
+     @if(session()->has('fail'))
+     <div class = "alert alert-danger">
+     {{session()->get('fail')}}
+     </div>
+     @endif
+       <form action="{{route('frontend.review_post')}}" method="post">
+         @csrf
+          <div class="row">
+             <div class="col-md-12">
+                <h4>How do you rate this product?</h4>
+                <div class="d-flex ">
+                   <div class="text-black-50 pt-2">Your Rating :</div> &nbsp; <div class="rating">
+                      <input type="radio" name="rating" value="5" id="5">
+                      <label for="5">☆</label>
+                      <input type="radio" name="rating" value="4" id="4">
+                      <label for="4">☆</label>
+                      <input type="radio" name="rating" value="3" id="3">
+                      <label for="3">☆</label>
+                      <input type="radio" name="rating" value="2" id="2">
+                      <label for="2">☆</label>
+                      <input type="radio" name="rating" value="1" id="1">
+                      <label for="1">☆</label>
+                   </div>
+                </div>
+             </div>
+             <div class="col-md-6">
+                <div class="form-group">
+                   <input type="text" name="name" class="form-control" placeholder="Your Name">
+                </div>
+             </div>
+             <div class="col-md-6">
+                <div class="form-group">
+                   <input type="text" name="email" class="form-control" placeholder="Your E-Mail">
+                </div>
+             </div>
+             <div class="col-md-12">
+                <div class="form-group">
+                   <textarea name="message" class="form-control" cols="100" rows="6" placeholder="Your Review"></textarea>
+                </div>
+             </div>
+             <input type ="hidden" value = "{{$pro_detail[0]->pro_id}}" name = "pro_id">
+             <div class="col-lg-12"> <a href="#">
+                   <button type="submit" class="btn btn-outline-secondary">Submit</button>
+                </a> </div>
+          </div>
+       </form>
+    </div>
+
+
+
+
+
+
+
+
     <p id = "thank_you_msg"></p>
 @if(session()->has('pin_check'))
                 <div class = "alert alert-success">

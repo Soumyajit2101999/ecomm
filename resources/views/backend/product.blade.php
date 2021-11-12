@@ -148,8 +148,8 @@
                   <td>{{$product->pro_disc}}</td>
                   <td>{!!$product->pro_description!!}</td>
                   <td>{{$product->pro_available}}</td>
-                  <td><a class="btn btn-warning" href="">Edit</a></td>
-                  <td><a class="btn btn-danger" href="">Delete</a></td>
+                  <td><a class="btn btn-warning" href="{{route('backend.edit_product',$product->pro_id)}}">Edit</a></td>
+                  <td><a class="btn btn-danger" href="{{route('backend.delete_product',$product->pro_id)}}">Delete</a></td>
                 </tr>
                 @endforeach
                 

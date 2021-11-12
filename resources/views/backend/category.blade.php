@@ -131,7 +131,7 @@
           </div>
           </div>
           <input name = "parent_id" type = "hidden" value = 0>
-          <input name = "is_active" type = "hidden" value = 1>
+          <input name = "is_active" type = "hidden" value = 0>
         
         <button type="submit" class="btn btn-primary">Add Category</button>
       </form>

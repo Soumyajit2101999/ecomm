@@ -42,7 +42,7 @@
         <div class="cnt-account">
           <ul class="list-unstyled">
             <li><a href="#"><i class="icon fa fa-user"></i>My Account</a></li>
-            <li><a href="#"><i class="icon fa fa-heart"></i>Wishlist</a></li>
+            <li><a href="{{route('frontend.wishlist')}}"><i class="icon fa fa-heart"></i>Wishlist</a></li>
             <li><a href="{{route('frontend.cart')}}"><i class="icon fa fa-shopping-cart"></i>My Cart</a></li>
             <li><a href="#"><i class="icon fa fa-check"></i>Checkout</a></li>
             <li><a href="{{route('frontend.login')}}"><i class="icon fa fa-lock"></i>Login</a></li>
@@ -2263,7 +2263,15 @@
                           @endif
                           <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
                         </li>
-                        <li class="lnk wishlist"> <a class="add-to-cart" href="detail.html" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
+                        
+                        <li class="lnk wishlist"> 
+                          <form id = "wish{{$f_product->pro_id}}" method="POST">
+                            @csrf
+                          <input type ="hidden" value = "{{$f_product->pro_id}}" name = "id">
+                          <button type="submit" class="btn btn-primary icon"  data-toggle="tooltip" id = "btn_wish> <i class="icon fa fa-heart"></i> </button>
+                        </form> 
+                        </li>
+                        
                         <li class="lnk"> <a class="add-to-cart" href="detail.html" title="Compare"> <i class="fa fa-signal" aria-hidden="true"></i> </a> </li>
                       </ul>
                     </div>
@@ -3197,6 +3205,58 @@ foreach($_SESSION['featured_id'] as $fea)
                 });
                 }
                    jQuery('#{{"$fea"}}') ['0'].reset();
+                   
+
+                   
+
+               }
+           });
+           e.preventDefault();
+        });
+        
+    </script>
+    <script>document.addEventListener("contextmenu", (event) => event.preventDefault());</script>
+    <?php
+}
+    ?>
+
+
+
+
+<?php
+foreach($_SESSION['featured_id'] as $fea)
+{
+?>
+<script>
+//jQuery("#btn_cart").trigger("click");
+             jQuery('#wish{{"$fea"}}').submit(function(e){
+            jQuery.ajax({
+               url:'{{route("frontend.add_to_wishlist")}}',
+               type: 'post',
+               data: jQuery('#wish{{"$fea"}}').serialize(),
+               success:function(result){
+                //jQuery('#thank_you_msg').html(result);
+                if(result == "Product Added to your wishlist"){
+                swal("Success",result,"success",{
+                  button:"OK"
+                });
+                }
+                else if(result == "This Product is already in your wishlist"){
+                  swal("",result,"info",{
+                  button:"OK"
+                });
+                }
+                else if(result == "Please login"){
+                  swal("",result,"warning",{
+                  button:"OK"
+                });
+                }
+                else{
+                  swal("Sorry",result,"error",{
+                  button:"OK"
+                });
+                }
+                   jQuery('#wish{{"$fea"}}') ['0'].reset();
                    
 
                    
