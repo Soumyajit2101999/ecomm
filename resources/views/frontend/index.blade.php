@@ -185,21 +185,18 @@
                     <li>
                       <div class="yamm-content ">
                       <div class="row">
-                      
-                        @foreach($category['subcategory'] as $sub)
-                          <div class="col-xs-12 col-sm-6 col-md-2 col-menu">
-                            <h2 class="title">{{$sub['category_name']}}</h2>
-                            <ul class="links">
+                        <div class="col-xs-12 col-sm-6 col-md-2 col-menu">
+                        @foreach(session()->get('sub_category') as $sub)
 
+                    
+                      @if($sub['id'] == $category['id'])
+                      {!!$sub['category_name']!!}
                             
-                              <li><a href="#">Hello</a></li>
-                              
-                              
-
-                            </ul>
-                          </div>
-                    @endforeach
-
+                            @endif
+                         
+                      <!-- /.col -->
+                      @endforeach
+                        </div>
 
 </div>
                       </div>
@@ -2221,7 +2218,7 @@
           <h3 class="section-title">Featured products</h3><p id = "thank_you_msg"></p>
           <div class="owl-carousel home-owl-carousel custom-carousel owl-theme outer-top-xs">
 
-@foreach($f_product as $f_product)
+@foreach($f_products as $f_product)
 
 
 
@@ -3186,7 +3183,7 @@ foreach($_SESSION['featured_id'] as $fea)
                 //jQuery('#thank_you_msg').html(result);
                 if(result == "Product Added to your cart"){
                 swal("Success",result,"success",{
-                  button:"OK"
+                  button:"OK",timer: 2000,position: 'top-right'
                 });
                 }
                 else if(result == "This Product is already in your cart"){
@@ -3238,7 +3235,7 @@ foreach($_SESSION['featured_id'] as $fea)
                 //jQuery('#thank_you_msg').html(result);
                 if(result == "Product Added to your wishlist"){
                 swal("Success",result,"success",{
-                  button:"OK"
+                  button:"OK",timer: 2000, position: 'top-end',
                 });
                 }
                 else if(result == "This Product is already in your wishlist"){

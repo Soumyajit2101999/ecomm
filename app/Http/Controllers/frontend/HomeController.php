@@ -54,7 +54,7 @@ $a = array();
 //return print_r($_SESSION['cart']);
 
 
-return view('frontend.index',['blog'=>$blog,'slider'=>$slider,'f_product'=>$featured_product]);
+return view('frontend.index',['blog'=>$blog,'slider'=>$slider,'f_products'=>$featured_product]);
 }
 
 public function category_func(Request $request){
@@ -120,20 +120,20 @@ $address = DB::table('address')->where('user_id',1)->get();
 
     function viewsubcat($categories)
     {
-        $html = '<ol class="link">';
+        $html = '<ul>';
         foreach($categories as $category){
     
             if($category['is_active'] == 1){
             $html .= '<li><a href = "">'.$category['category_name'].'</a></li>';
             }
             else{
-                $html .= '<li ><b>'.$category['category_name'].'</b></li>';
+                $html .= '<li><b>'.$category['category_name'].'</b></li>';
             }
             if( ! empty($category['subcategory'])){
                 $html .= $this->viewsubcat($category['subcategory']);
             }
         }
-        $html .= '</ol>';
+        $html .= '</ul>';
         
         return $html;
     }

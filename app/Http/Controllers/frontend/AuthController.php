@@ -74,7 +74,7 @@ else{
                 $request->session()->put('name',$userInfo->name);
                 $request->session()->put('email',$userInfo->email);
                 $request->session()->put('address',$userInfo->address);
-                //$request->session()->put('u',$userInfo->pin);
+                $request->session()->put('u_pin',$userInfo->pin);
                 $request->session()->put('phone',$userInfo->phone);
                 $request->session()->put('gender',$userInfo->gender);
                 $non_pin_pro = array();

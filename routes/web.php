@@ -13,6 +13,7 @@ use App\Http\Controllers\frontend\ContactController;
 use App\Http\Controllers\frontend\WishListController;
 use App\Http\Controllers\frontend\ReviewController;
 use App\Http\Controllers\frontend\CouponController;
+use App\Http\Controllers\frontend\ProfileController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -55,6 +56,8 @@ Route::group(['middleware'=>['AuthCheck']],function(){
     Route::get('frontend/wishlist',[WishListController::class,'view_wishlist'])->name('frontend.wishlist');
     Route::get('frontend/wishlist_delete/{id}',[WishListController::class,'delete'])->name('frontend.wishlist_delete');
     Route::post('frontend/review_post',[ReviewController::class,'post'])->name('frontend.review_post');
+    Route::get('frontend/profile',[ProfileController::class,'profile_view'])->name('frontend.profile');
+    Route::post('frontend/profile_update',[ProfileController::class,'profile_update'])->name('frontend.profile_update');
 });
 });
 Route::get('/cat',[HomeController::class,'category_func'])->name('cat');
@@ -100,6 +103,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('/backend/coupon',[App\Http\Controllers\backend\CouponController::class,'coupon_view'])->name('backend.coupon');
 
     Route::post('/backend/coupon_post',[App\Http\Controllers\backend\CouponController::class,'post'])->name('backend.coupon_post');
+
+    Route::get('/backend/coupon_delete/{id}',[App\Http\Controllers\backend\CouponController::class,'coupon_delete'])->name('backend.coupon_delete');
 
     //Contact
     Route::get('/backend/contact',[App\Http\Controllers\backend\ContactController::class,'contact'])->name('backend.contact');

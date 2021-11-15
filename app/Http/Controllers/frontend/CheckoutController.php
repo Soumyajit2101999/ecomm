@@ -129,6 +129,7 @@ class CheckoutController extends Controller
              Mail::to(Session::get('email'))->send(new testmail($mail));
             unset($_SESSION['subtotal']);
             unset($_SESSION['total']);
+            unset($_SESSION['grand_total']);
 
         }
         return redirect()->route('frontend.my_order');
@@ -138,7 +139,10 @@ class CheckoutController extends Controller
             $users = Session::get('user_id');
             $delete = DB::table('cart')->where('user_id',$users)->delete();
         }
-        return redirect()->back();
+        unset($_SESSION['subtotal']);
+        unset($_SESSION['total']);
+        unset($_SESSION['grand_total']);
+        return redirect()->back()->with('fail',"You cannot proceed to checkout. Your given pin code does not match.");
     }
 
 
